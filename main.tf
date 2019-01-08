@@ -93,7 +93,7 @@ resource "aws_db_instance" "rds" {
   copy_tags_to_snapshot       = true
   db_subnet_group_name        = "${aws_db_subnet_group.rds.name}"
   engine                      = "postgres"
-  engine_version              = "10.1"
+  engine_version              = "${var.engine_version}"
   final_snapshot_identifier   = "${var.name}-final"
   identifier                  = "${var.name}"
   instance_class              = "${var.instance_class}"
