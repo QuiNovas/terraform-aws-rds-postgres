@@ -4,7 +4,7 @@ variable "database_name" {
 }
 
 variable "engine_version" {
-	default     = "10.1"
+  default     = "10.1"
   description = "The version of PostgreSQL used when the DB instance is created."
   type        = "string"
 }
