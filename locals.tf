@@ -1,3 +1,9 @@
 locals {
-  tags = "${merge(var.tags, map("Name", "${var.name}"))}"
+  tags = merge(
+    var.tags,
+    {
+      "Name" = var.name
+    },
+  )
 }
+
