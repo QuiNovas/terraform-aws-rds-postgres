@@ -8,18 +8,9 @@ resource "aws_db_parameter_group" "rds" {
   family = "postgres10"
   name   = "${var.name}-postgres10"
   dynamic "parameter" {
-    for_each = [for parameter in var.parameters:{
-      apply_method  = parameter.apply_method
-      name          = parameter.name
-      value         = parameter.value
-    }]
+    for_each = var.parameter
     content {
-      # TF-UPGRADE-TODO: The automatic upgrade tool can't predict
-      # which keys might be set in maps assigned here, so it has
-      # produced a comprehensive set here. Consider simplifying
-      # this after confirming which keys can be set in practice.
-
-      apply_method = parameter.value.apply_method
+      apply_method = lookup(parameter.value, "apply_method", "immediate")
       name         = parameter.value.name
       value        = parameter.value.value
     }

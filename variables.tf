@@ -4,7 +4,7 @@ variable "database_name" {
 }
 
 variable "engine_version" {
-  default     = "10.1"
+  default     = "10.6"
   description = "The version of PostgreSQL used when the DB instance is created."
   type        = string
 }
@@ -19,10 +19,14 @@ variable "name" {
   type        = string
 }
 
-variable "parameters" {
+variable "parameter" {
   default     = []
   description = "A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group."
-  type        = list(string)
+  type        = list(object({
+      apply_method  = string
+      name          = string
+      value         = string
+  }))
 }
 
 variable "subnet_ids" {
